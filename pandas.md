@@ -11,7 +11,7 @@ pandas提供了读取和写入主流文件格式的方法，如csv，excel，jso
 
 #### `import pandas as pd` <br>
 #### `df=pd.read_csv("filename")#df(whatever you want)暗指DataFrame,因为读出来的对象是dataframe类型`
-read_csv一般而言只需要指定需要读的文件信息即可，但是为了其他处理，你也可以对其他默认参数进行修改，一般读不了的文件就需要修改默认参数的值，才能正确读取文件。<br>
+read_csv()一般而言只需要指定需要读的文件信息即可，但是为了其他处理，你也可以对其他默认参数进行修改，一般读不了的文件就需要修改默认参数的值，才能正确读取文件。<br>
 下面来扒一下read_csv方法参数的意义
 > 基本参数：filepath__or__buffer,sep,delimiter,delim_whitespace.
 在介绍参数时，英文部分为指定的参数的数据类型，和默认的参数值。
@@ -19,19 +19,45 @@ read_csv一般而言只需要指定需要读的文件信息即可，但是为了
 filepath__or__buffer：str 指的是文件信息，这里可以是在工作目录下的csv文件(如果找不到会报错),也可以是绝对路径下的csv文件，也可以是URL格式(直接访问网络资源，支持主流的数据传输方式)，都是str类型。<br>
 sep:指定分隔符,default=",",dtype=str,如果是read_table()的话默认是"\t",可以指定不同类型的分隔符，但是分隔符必须是str类型的。<br>
 delimiter:跟sep参数一致，和sep二选一即可<br>
-delim_whitespace：default=false，dtype=boolean，如果参数为True,则sep="\s+"
+delim_whitespace：default=false，dtype=boolean，如果参数为True,则sep="\s+"<br>
 ![](read_csv.png)
 
 一些不常见但是有可能会用上的参数，其实算是数据预(预处理)，是比较高级用法，涉及到内存管理，引擎设置等，是为了更加efficient去读一个csv文件，但是绝大多数情况下都不怎么用到(像我就用到过一次),一般都是在读完csv之后对DataFrame对象进行操作，而不是在读的时候就进行操作，我更加推荐前者。
 
 > 非常用参数： header,names,index_col,prefix,dtype,skiprows,skipinitialspace,nrows,na_values,keep_default_na,na_filter,compression等
 
-很多的参数一看名字就知道用法，我就简单介绍，涉及用法较多，更加常用的涉及的篇幅会长一点。
+很多的参数一看名字就知道用法，我就简单介绍，涉及用法较多，更加常用的涉及的篇幅会长一点。<br>
 header：dtype=infer or list of ints,default="infer"，不设置列名header=0，列名会自动取文件的第一行，如果想自己设定列名(header=None，columns=[]),如果涉及到multipleindex的话，参数就是list of ints。<br>
 names:设置列名，和columns一致。<br>
 prefix:dtype=str default=None，当列名不存在时，对列名进行预修改，如'x'to 'x1'	,'x2'.....<br>
 dtype:default=None,指定数据类型,可以指定数据类型为dtype=object。<br>
-skiprows:dtype=list-like 跳过行,default=None,传入list可以跳过指定行。nrows:dtpye=int,default=None,阅读文件前多少行。<br>
+skiprows:dtype=list-like default=None,跳过行,传入list可以跳过指定行。<br>nrows:dtpye=int,default=None,阅读文件前多少行。<br>
 na_values:dtype=scalar,str,list-like,default=None,具体描述见官方文档<br>
-na_filter:dtype=boolean,default=True,检测缺失值，如果不想检测设为false，可以提高阅读大型文档的表现
+na_filter:dtype=boolean,default=True,检测缺失值，如果不想检测设为false，可以提高阅读大型文档的表现<br>
 compression : dtype={'infer', 'gzip', 'bz2', 'zip', 'xz', None}, default='infer'自动检测以压缩包为后缀的文件，也可以自己指定，但是压缩包内必须有且仅有一个数据文件。
+
+### pandas 写数据
+to_csv()方法详解：无论是Series还是DataFrame都有to_csv方法，只有path_or_buf参数需要指定，其他都为默认的可修改参数。
+> para list:path_or_buf,sep,na_rep,float_format,columns,header,index,mode,encoding...
+
+path_or_buf：和read_csv()一致，指定路径文件。<br>
+sep:分隔符。<br>
+na_rep:dtype=str,default='',用指定字符来填充缺失值，默认空字符。<br>
+float_format:格式化字符串to float<br>
+columns:default=None columns to write.<br>
+header:default=True,是否写入列名<br>
+index:default=True,是否写入行名<br>
+mode:default="w"文件的写入模式，若不存在则创建新文件，一般常用的还有"a"代表append，在原有文件上添加<br>
+encoding:dtpye=str，指定文件的编码格式，这个很重要，编码格式决定了python解释器如何去读或者去写文件!<br><br>
+
+<center>------------------------------------关于csv文件的读写介绍到此(详见官方文档),其他文件的读写也类似------------------------------------</center>
+<p align="right">[官方文档](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html) </p>
+
+#### 关于DataFrame的介绍及常用的使用方法介绍
+&emsp;&emsp;DataFrame是二维带标签的数据结构，其同一列数据的数据类型要求相同，但不同列的可以不同。可以将DataFrame看做电子表格或SQL表，或Series对象的字典。DataFrame是Pandas中使用最多的数据结构。<br>
+&emsp;&emsp;DataFrame带有2组标签 index (row labels) 和 columns (column labels)，其数据可以是：
+- 一维Numpy数组，列表，字典或Series组成的字典。<br>
+- 二维Numpy数组<br>
+- Numpy结构化数组<br>
+- 其他DataFrame<br>
+
