@@ -5,7 +5,7 @@ pandas是数据清洗最著名的一个库了可以说，使用频率相当的�
 
 ###  pandas读数据
 <br>最简单也最重要的一part
-pandas提供了读取和写入主流文件格式的方法，如csv，excel，json,html,HDF5 format,SQL
+pandas提供了读取和写入主流文件格式的方法，如csv，excel，json,html,HDF5 format,SQL。
 首先从最重要也最常用的csv文件开始<br>
 >CSV(comma-separated value，逗号分隔值)文件格式是一种非常简单的数据存储与分享方式，以纯文本形式存储表格数据（数字和文本）。CSV文件由任意数目的记录组成，记录间以某种换行符分隔；每条记录由字段组成，字段间的分隔符是其它字符或字符串，最常见的是逗号或制表符。通常，所有记录都有完全相同的字段序列，读取csv的语句大概是长这样子的<br>
 
@@ -53,7 +53,7 @@ encoding:dtpye=str，指定文件的编码格式，这个很重要，编码格�
 <center>------------------------------------关于csv文件的读写介绍到此(详见官方文档),其他文件的读写也类似------------------------------------</center>
 <p align="right">[官方文档](https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html) </p>
 
-#### 关于DataFrame的介绍及常用的使用方法介绍
+### 关于DataFrame的介绍及常用的使用方法介绍
 &emsp;&emsp;DataFrame是二维带标签的数据结构，其同一列数据的数据类型要求相同，但不同列的可以不同。可以将DataFrame看做电子表格或SQL表，或Series对象的字典。DataFrame是Pandas中使用最多的数据结构。<br>
 &emsp;&emsp;DataFrame带有2组标签 index (row labels) 和 columns (column labels)，其数据可以是：
 - 一维Numpy数组，列表，字典或Series组成的字典。<br>
@@ -61,3 +61,20 @@ encoding:dtpye=str，指定文件的编码格式，这个很重要，编码格�
 - Numpy结构化数组<br>
 - 其他DataFrame<br>
 
+关于DataFrame的tips：在DataFrame里row用index来代替，所以访问行的时候其实就只需要访问index即可，在DataFrame选中自己想要分析数据的部分是一件对新手来说不这么友好的事情，因为pandas提供了很多，各种各样的访问DataFrame的属性方法，熟练掌握并应用这些方法，对清洗数据来说十分地重要！！！！<br>
+#### [ ]运算符和.运算符提供了pandas访问数据的很多便捷性！<br>
+![](dataframe_processing.png)
+
+|Operation|Syntax|Result|
+|:--|:--|:--|
+|选择列|df[col]|Series|
+|选择行（标签）|df.loc[label]|Series|
+|选择行（整数）|df.iloc[col]|Series|
+|选择块|df.iloc[rows, colos]|DataFrame|
+|多行切片|df[5:10]|DataFrame|
+|通过布尔向量选择多行|df[bool_vec]|DataFrame|
+
+这里着重讲解一下选择块和通过布尔向量选择多行，df.iloc[rows,colos],这里的rows和colos可以是多行，也可以是切片，比如df.iloc[0:3,0:5]==df.iloc[:3,:5]这两种写法都是等价的，表示选取了前三行的前五列。<br>
+通过布尔向量选择多行也是一个使用率很高的用法，比如df[df[col]>1]表示选中指定列大于1的所有行。
+
+### 关于DataFrame对象的合并
