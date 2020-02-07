@@ -8,11 +8,6 @@ import tweepy
 import json
 import csv
 
-consumer_key="GBdhTAQPrEPDq4jV63PcdFHJf"
-consumer_secret="JhUCySiJGMyK86ahtPUxXIwD2YYhFN5E6AWUjG9KdcSFy8S3hA"
-access_token="1222353136150437890-U7ssgmG33F4ECwIGuTmZggF4pWXj2x"
-access_token_secret="WILeWfr2Aia4L5K93imjCPdPIeNFYb6ZnCdvO6DEMGrM4"
-
 auth =tweepy.OAuthHandler(consumer_key=consumer_key,consumer_secret=consumer_secret) 
 auth.set_access_token(access_token,access_token_secret)
 api=tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
