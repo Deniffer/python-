@@ -78,3 +78,9 @@ encoding:dtpye=str，指定文件的编码格式，这个很重要，编码格�
 通过布尔向量选择多行也是一个使用率很高的用法，比如df[df[col]>1]表示选中指定列大于1的所有行。
 
 ### 关于DataFrame对象的合并
+
+
+
+
+### 如何从一个字典创建dataframe对象
+先转换成list列表,运用d.items()方法,如list(d.items())
