@@ -7,9 +7,11 @@
 ### 利用国内镜像 加速下载pip过程  pip install +i +url 
 
  ![url](https://blog.csdn.net/wcy23580/article/details/89927303)
-
-
-
+清华：https://pypi.tuna.tsinghua.edu.cn/simple
+阿里云：https://mirrors.aliyun.com/pypi/simple/
+中国科技大学 https://pypi.mirrors.ustc.edu.cn/simple/
+华中理工大学：http://pypi.hustunique.com/
+山东理工大学：http://pypi.sdutlinux.org/
 
 # Jupyter Notebook 使用小知识
 ## 命令模式
@@ -24,3 +26,11 @@
 
 ## 编辑模式
 >快捷键 shirt+Tab 提示更多信息，+?后显示更加详细的信息
+
+
+
+
+
+## pyqt5 and pyqt-tools
+在anaconda模式下才可用
+ pyuic5 -x + filename -o +orient file

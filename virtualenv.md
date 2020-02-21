@@ -9,3 +9,4 @@
 #### pip install virtualenvwrapper 暂时不知道是干什么用的
 
 #### pip freeze 查看当前环境安装了那些包
+
