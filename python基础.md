@@ -13,6 +13,10 @@
 华中理工大学：http://pypi.hustunique.com/
 山东理工大学：http://pypi.sdutlinux.org/
 
+清理anaconda conda clean -t -p//删除无用包和tar
+
+
+
 # Jupyter Notebook 使用小知识
 ## 命令模式
 >快捷键 shirt+enter 执行当前块并生成下一个空白的代码块，进入命令模式

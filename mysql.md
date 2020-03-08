@@ -17,4 +17,3 @@ mysql -u root -p  and enter the password
 
 
 
-## 参考link https://blog.csdn.net/u013235478/article/details/50623693
